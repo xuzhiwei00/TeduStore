@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ 	"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="cn.tedu.store.mapper.DictMapper">
+	<!--查询省份  -->
+	<select id="selectProvince" resultType="cn.tedu.store.bean.Provinces">
+		select
+			id,
+			province_code as provinceCode,
+			province_name as provinceName
+		from
+			t_dict_provinces
+	</select>
+	<!-- 查询城市 -->
+	<select id="selectCity" parameterType="String" resultType="cn.tedu.store.bean.City">
+		select 
+			id,
+			province_code as provinceCode,
+			city_code as cityCode,
+			city_name as cityName
+		from 
+			t_dict_cities
+		where
+			province_code = #{provinceCode}
+	</select>
+	<select id="selectAreas" parameterType="String" resultType="cn.tedu.store.bean.Areas">
+		select
+			id,
+			city_code as cityCode,
+			area_code as areaCode,
+			area_name as areaName
+		from
+			t_dict_areas
+		where
+			city_code = #{cityCode}
+	</select>
+	<select id="selectProvinceNameByCode" parameterType="String" resultType="String">
+		select
+			province_name as provinceName
+		from
+			t_dict_provinces
+		where
+			province_code = #{provinceCode}
+	</select>
+	<select id="selectCityNameByCode" parameterType="String" resultType="String">
+		select
+			city_name as cityName
+		from
+			t_dict_cities
+		where
+			city_code = #{cityCode}
+	</select>
+	<select id="selectAreasNameByCode" parameterType="String" resultType="String">
+		select
+			area_name as areaName
+		from
+			t_dict_areas
+		where
+			area_code = #{areaCode}
+			
+	</select>
+</mapper>

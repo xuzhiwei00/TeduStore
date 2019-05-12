@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ 	"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="cn.tedu.store.mapper.CartMapper">
+	<!-- 插入数据到订单表里面 -->
+	<insert id="insertCart" parameterType="cn.tedu.store.bean.Cart">
+		insert into t_cart
+			(uid,goods_id,count,created_user,created_time,modified_user,modified_time)
+		values
+			(#{uid},#{goodsId},#{count},#{createdUser},#{createdTime},#{modifiedUser},#{modifiedTime})
+	</insert>	
+	<select id="selectCart"  resultType="cn.tedu.store.bean.CartVo">
+		select
+			c.id id,c.uid uid,g.id goodsId,image,title,price,count
+		from
+			t_cart c,t_goods g
+		where
+			c.goods_id=g.id and c.uid=#{uid}
+			
+	</select>
+	<delete id="deleteCartById" parameterType="Integer">
+		delete from t_cart 
+		where id=#{id}
+	</delete>
+	<delete id="deleteBatchById" parameterType="Integer">
+		delete from t_cart
+		where id in
+		<foreach collection="ids" item="id" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+	<update id="updateCountById">
+		update t_cart
+		set
+			count=#{count}
+		where
+			id=#{id}
+	</update>
+	<select id="selectCartByUId" parameterType="Integer" resultType="cn.tedu.store.bean.Cart">
+		select
+			id,uid,goods_id as goodsId,count,created_user as createdUser,created_time as createdTime,modified_user as modifiedUser,modified_time as modifiedTime
+		from 
+			t_cart
+		where
+			uid=#{uid}
+	</select>
+	</mapper>
