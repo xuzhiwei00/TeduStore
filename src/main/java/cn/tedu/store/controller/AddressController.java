@@ -114,6 +114,7 @@ public class AddressController extends BaseController{
 		rr.setMessage("修改成功");
 		return rr;
 	}
+	//删除地址
 	@RequestMapping("/deleteAddress.do")
 	@ResponseBody
 	public ResponseResult<Void> deleteAddress(Integer id){
@@ -122,5 +123,6 @@ public class AddressController extends BaseController{
 		rr.setState("1");
 		rr.setMessage("删除成功");
 		return rr;
+		
 	}
 }
