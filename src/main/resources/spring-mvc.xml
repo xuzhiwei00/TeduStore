@@ -44,7 +44,7 @@
 		        <mvc:mapping path="/address/*"/>
 		        <mvc:mapping path="/cart/*"/>
 		        <mvc:mapping path="/order/*"/>
-		        
+		        <!-- 哪些请求不需要拦截 -->
 		        <mvc:exclude-mapping path="/user/showRegister.do"/>
 		        <mvc:exclude-mapping path="/user/register.do"/>
 		        <mvc:exclude-mapping path="/user/checkUsername.do"/>
